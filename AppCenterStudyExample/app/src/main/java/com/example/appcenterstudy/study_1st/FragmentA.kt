@@ -1,4 +1,4 @@
-package com.example.appcenterstudy
+package com.example.appcenterstudy.study_1st
 
 import android.os.Bundle
 import android.view.LayoutInflater

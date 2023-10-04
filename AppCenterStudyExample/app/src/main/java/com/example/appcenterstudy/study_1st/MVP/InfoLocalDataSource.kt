@@ -1,6 +1,7 @@
-package com.example.appcenterstudy.MVP
+package com.example.appcenterstudy.study_1st.MVP
 
 import android.content.Context
+import com.example.appcenterstudy.study_1st.MVP.InfoDataSource
 import org.json.JSONObject
 
 class InfoLocalDataSource(context : Context) : InfoDataSource {

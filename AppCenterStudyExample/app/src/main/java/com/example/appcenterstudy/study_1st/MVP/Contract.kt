@@ -1,4 +1,4 @@
-package com.example.appcenterstudy.MVP
+package com.example.appcenterstudy.study_1st.MVP
 
 import org.json.JSONObject
 

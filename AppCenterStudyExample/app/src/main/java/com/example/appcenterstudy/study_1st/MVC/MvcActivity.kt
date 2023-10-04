@@ -1,4 +1,4 @@
-package com.example.appcenterstudy
+package com.example.appcenterstudy.study_1st.MVC
 
 import android.app.Activity
 import android.os.Bundle

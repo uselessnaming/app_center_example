@@ -1,4 +1,4 @@
-package com.example.appcenterstudy.MVP
+package com.example.appcenterstudy.study_1st.MVP
 
 import android.os.Bundle
 import android.view.AbsSavedState
