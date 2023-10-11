@@ -26,30 +26,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical|center_horizontal">
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.minusCount()}"
                 android:text="minus"
-                android:textSize = "15sp"
-                android:onClick="@{() -> viewModel.minusCount()}"/>
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.count.toString()}"
-                android:textSize="15sp"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"/>
+                android:layout_marginEnd="20dp"
+                android:text="@{viewModel.count.toString()}"
+                android:textSize="15sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{()->viewModel.addCount()}"
                 android:text="plus"
-                android:textSize="15sp"
-                android:onClick="@{()->viewModel.addCount()}"/>
+                android:textSize="15sp" />
 
         </LinearLayout>
 
