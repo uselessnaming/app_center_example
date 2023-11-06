@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
                 Box(
                     modifier = Modifier.fillMaxSize()
                 ){
-//                    TodoListApp()
-                    ApiTestScreen()
+                    TodoListApp()
+//                    ApiTestScreen()
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.example.appcenterstudy.study_5th
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,19 +24,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.appcenterstudy.study_8th.AlarmDialog
+import com.example.appcenterstudy.study_8th.UserViewModel
 import com.example.appcenterstudy.ui.theme.AppCenterStudyTheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,6 +54,38 @@ fun LoginScreen(
 ){
     var idState by remember{ mutableStateOf("") }
     var passwdState by remember{mutableStateOf("")}
+
+    val coroutineScope = rememberCoroutineScope()
+    val configuration = LocalConfiguration.current
+    val width = configuration.screenWidthDp
+    val height = configuration.screenHeightDp
+
+    var showDialog by remember{mutableStateOf(false)}
+    var dialogMessage by remember{mutableStateOf("")}
+
+    val context = LocalContext.current
+    val userViewModel = UserViewModel(context)
+
+    if (showDialog){
+        AlarmDialog(
+            width = (width * 0.8).dp,
+            height = (height * 0.3).dp,
+            text = dialogMessage,
+            onOkClick = {
+                showDialog = false
+            },
+            onDismissRequest = {
+                showDialog = false
+            }
+        )
+        if (dialogMessage == "로그인 성공"){
+            //로그인
+            navController.navigate(Screens.HomeScreen.name)
+        } else if (dialogMessage == "로그인 실패.\n" + "정보를 확인해주세요"){
+            idState = ""
+            passwdState = ""
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -77,7 +119,9 @@ fun LoginScreen(
                 value = idState,
                 onValueChange = {
                     idState = it
-                }
+                },
+                singleLine = true,
+                maxLines = 1
             )
         }
 
@@ -101,7 +145,10 @@ fun LoginScreen(
                 value = passwdState,
                 onValueChange = {
                     passwdState = it
-                }
+                },
+                singleLine = true,
+                maxLines = 1,
+                visualTransformation = PasswordVisualTransformation()
             )
         }
 
@@ -114,8 +161,19 @@ fun LoginScreen(
             Button(
                 modifier = Modifier.width(100.dp),
                 onClick = {
-                    //로그인
-                    navController.navigate(Screens.HomeScreen.name)
+                    coroutineScope.launch(Dispatchers.IO){
+                        /**
+                         * id가 NotEmpty, passwd가 NotEmpty일 때 로그인 수행
+                         */
+                        if (idState.isNotEmpty() && passwdState.isNotEmpty()){
+                            dialogMessage = userViewModel.login(idState, passwdState)
+                        } else if (idState.isEmpty()){
+                            dialogMessage = "아이디를 입력해주세요"
+                        } else {
+                            dialogMessage = "비밀번호를 입력해주세요"
+                        }
+                        showDialog = true
+                    }
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Blue
@@ -139,7 +197,10 @@ fun LoginScreen(
             Text(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(bottom = 1.dp),
+                    .padding(bottom = 1.dp)
+                    .clickable{
+                        navController.navigate(Screens.AddUserScreen.name)
+                    },
                 text = "회원 가입",
                 textAlign = TextAlign.Center,
                 color = Color.Gray
