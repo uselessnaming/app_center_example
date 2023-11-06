@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import com.example.appcenterstudy.study_5th.TodoListApp
+import com.example.appcenterstudy.study_7th.ApiTestScreen
+import com.example.appcenterstudy.study_7th.AreaAPI
 import com.example.appcenterstudy.ui.theme.AppCenterStudyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +20,8 @@ class MainActivity : AppCompatActivity() {
                 Box(
                     modifier = Modifier.fillMaxSize()
                 ){
-                    TodoListApp()
+//                    TodoListApp()
+                    ApiTestScreen()
                 }
             }
         }

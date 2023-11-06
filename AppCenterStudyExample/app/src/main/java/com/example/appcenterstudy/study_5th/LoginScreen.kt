@@ -42,7 +42,6 @@ import com.example.appcenterstudy.ui.theme.AppCenterStudyTheme
 fun LoginScreen(
     navController : NavController
 ){
-
     var idState by remember{ mutableStateOf("") }
     var passwdState by remember{mutableStateOf("")}
 
@@ -132,36 +131,42 @@ fun LoginScreen(
         Spacer(Modifier.height(10.dp))
 
         Row(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .height(20.dp),
             verticalAlignment = Alignment.CenterVertically
         ){
             Text(
-                modifier = Modifier.weight(1f)
-                    .padding(bottom= 1.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(bottom = 1.dp),
                 text = "회원 가입",
                 textAlign = TextAlign.Center,
                 color = Color.Gray
             )
             Box(
-                Modifier.width(2.dp)
+                Modifier
+                    .width(2.dp)
                     .fillMaxHeight()
                     .background(Color.Gray)
             )
             Text(
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
                     .padding(bottom = 1.dp),
                 text = "아이디 찾기",
                 textAlign = TextAlign.Center,
                 color = Color.Gray
             )
             Box(
-                Modifier.width(2.dp)
+                Modifier
+                    .width(2.dp)
                     .fillMaxHeight()
                     .background(Color.Gray)
             )
             Text(
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
                     .padding(bottom = 1.dp),
                 text = "비밀번호 찾기",
                 textAlign = TextAlign.Center,
